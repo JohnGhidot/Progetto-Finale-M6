@@ -9586,14 +9586,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: SimpleProjectile
+  - type: 0
     prefab: {fileID: 1847294317857805181, guid: 0ba9b40364d7ed54394e1ba4bb098c31,
       type: 3}
     size: 5
-  - tag: ExplosiveProjectile
+  - type: 0
     prefab: {fileID: 6453343730685604279, guid: 498510108fd0a544a91bd7bec095454e,
       type: 3}
     size: 5
+  _expandable: 1
 --- !u!4 &1153748065
 Transform:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TowerController : MonoBehaviour
 {
-    private enum ProjectileType { Simple, Explosive }
     [SerializeField] private ProjectileType _type = ProjectileType.Simple;
 
     [SerializeField] private float _attackRange = 10f;
@@ -38,23 +37,18 @@ public class TowerController : MonoBehaviour
     {
         Vector3 dir = (_targetPlayer.position - _firePoint.position).normalized;
 
-        string projectileTag = _type == ProjectileType.Simple ? "SimpleProjectile" : "ExplosiveProjectile";
+        GameObject projectile = _poolManager.SpawnFromPool(_type, _firePoint.position, Quaternion.LookRotation(dir));        
+            
+         if (projectile == null)
+         {
+             return;
+         }
 
-        if (_poolManager != null)
-        {
-            GameObject projectile = _poolManager.SpawnFromPool(projectileTag, _firePoint.position, Quaternion.LookRotation(dir));
-
-            if (projectile == null)
-            {
-                return;
-            }
-
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                float projectileSpeed = 15f;
-                rb.velocity = dir * projectileSpeed;
-            }
-        }
+         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+         if (rb != null)
+         {
+             float projectileSpeed = 15f;
+             rb.velocity = dir * projectileSpeed;
+         }        
     }
 }
