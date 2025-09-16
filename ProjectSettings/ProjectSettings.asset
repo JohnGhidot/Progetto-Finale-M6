@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 70ef945270f3e4c4c85c1a7428b98324
+  productGUID: aef66dd2c41ad9244b33efdc6022dabc
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Progetto-Finale-M6
+  productName: Progetto-Finale-M4
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -843,14 +843,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Progetto-Finale-M6
+  metroPackageName: Progetto-Finale-M4
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Progetto-Finale-M6
+  metroApplicationDescription: Progetto-Finale-M4
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -920,10 +920,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 8f89769f-5d7a-42d8-b5cd-214ceaa65922
+  cloudProjectId: 440570b8-4263-435a-a93d-fce968911779
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Progetto-Finale-M6 2025-09-16_19-07-01
+  projectName: Progetto-Finale-M4
   organizationId: unity_dab0ce07ed4aec60fd15
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
