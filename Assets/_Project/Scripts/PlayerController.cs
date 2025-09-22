@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private Transform cameraPivot;
+
+    [Header("Setting Tank Controls")]
+    [SerializeField] private float _RotationSpeed = 220f;
+    [SerializeField] private float _DeadZone = 0.1f;
+    [SerializeField] private bool _InvertTurnWhenReversing = true;
 
     private Rigidbody _rb;
     private bool isGrounded;
@@ -34,30 +37,35 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        Vector3 input = new Vector3(h, 0f, v);
+        
 
-        if (input.magnitude == 0f)
+        if (Mathf.Abs(h) < _DeadZone)
         {
-            _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f);
-            return;
+            h = 0f;
+        }
+        if (Mathf.Abs(v) < _DeadZone)
+        {
+            v = 0f;
         }
 
-        if (cameraPivot == null) return;
+        if (_InvertTurnWhenReversing == true)
+        {
+            if (v < 0f)
+            {
+                h = -h;
+            }
+        }
 
-        Vector3 forward = cameraPivot.forward;
-        forward.y = 0f;
-        forward.Normalize();
+        Vector3 currentVel = _rb.velocity;
+        Vector3 planarVel = transform.forward * (v * _Speed);
+        _rb.velocity = new Vector3(planarVel.x, currentVel.y, planarVel.z);
 
-        Vector3 right = cameraPivot.right;
-        right.y = 0f;
-        right.Normalize();
-
-        Vector3 moveDir = (right * h + forward * v).normalized;
-        _rb.velocity = new Vector3(moveDir.x * _Speed, _rb.velocity.y, moveDir.z * _Speed);
-
-
-        Quaternion targetRotation = Quaternion.LookRotation(moveDir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 7f * Time.fixedDeltaTime);
+        if (h != 0f)
+        {
+            float deltaDegrees = h * _RotationSpeed * Time.fixedDeltaTime;
+            Quaternion deltaRot = Quaternion.Euler(0f, deltaDegrees, 0f);
+            _rb.MoveRotation(_rb.rotation * deltaRot);
+        }
     }
 
     private void HandleJump()
