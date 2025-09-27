@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
 public class AnimationController : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class AnimationController : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
         _playerController = GetComponent<PlayerController>();
     }
@@ -28,6 +27,7 @@ public class AnimationController : MonoBehaviour
 
         bool isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
         _animator.SetBool("IsGrounded", isGrounded);
+        _animator.SetFloat("VerticalVelocity", _rb.velocity.y);
 
         if (_wasGrounded && !isGrounded && _rb.velocity.y > 0.1f)
         {
@@ -35,5 +35,11 @@ public class AnimationController : MonoBehaviour
         }
 
         _wasGrounded = isGrounded;
+
+        //if (_animator != null)
+        //{
+        //    Debug.Log("Animator trovato: " + _animator);
+        //}
+
     }
 }
